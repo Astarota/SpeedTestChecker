@@ -12,7 +12,7 @@ def browser(request):
     options.add_argument('--disable-gpu')
     options.add_argument('--disable-software-rasterizer')
     browser = webdriver.Chrome(options=options)
-    print("\nstart browser for test.33.")
+    print("\nstart browser for test..")
     browser = webdriver.Chrome()
     yield browser
     print("\nquit browser..")

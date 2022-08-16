@@ -6,7 +6,7 @@ import time
 import openpyxl as O
 
 Excel_file="C:\\Users\\Dossan\\Desktop\\Results.xlsx"
-Excel_worksheet="Results"
+Excel_worksheet="Лист1"
 
 class SpeedPage(BasePage):
 	def should_be_add_to_cart(self):
