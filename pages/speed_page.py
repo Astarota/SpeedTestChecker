@@ -1,7 +1,7 @@
-from .base_page import BasePage
-from .locators import SpeedPageLocators
 from selenium.common.exceptions import ElementNotInteractableException
 from selenium.common.exceptions import StaleElementReferenceException
+from .base_page import BasePage
+from .locators import SpeedPageLocators
 import time
 import openpyxl as O
 
