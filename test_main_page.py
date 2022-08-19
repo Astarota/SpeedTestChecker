@@ -1,5 +1,5 @@
 from selenium.webdriver.support.ui import WebDriverWait
-from .pages.speed_page import SpeedPage
+from pages.speed_page import SpeedPage
 import time
 import pytest
 def test_speed_test(browser):

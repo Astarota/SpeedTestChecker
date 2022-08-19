@@ -1,8 +1,8 @@
 from selenium.common.exceptions import ElementNotInteractableException
 from selenium.common.exceptions import StaleElementReferenceException
 from selenium.common.exceptions import NoSuchElementException
-from .base_page import BasePage
-from .locators import SpeedPageLocators
+from pages.base_page import BasePage
+from pages.locators import SpeedPageLocators
 import time
 import openpyxl as O
 
@@ -16,9 +16,14 @@ class SpeedPage(BasePage):
 		self.should_be_upload_number()
 
 	def should_be_go_click(self):
-		btn = self.browser.find_element(*SpeedPageLocators.go_btn)
-		btn.click()
-		time.sleep(40)
+		try:
+			btn = self.browser.find_element(*SpeedPageLocators.go_btn)
+			btn.click()
+			time.sleep(37)
+		except(ElementNotInteractableException,StaleElementReferenceException,NoSuchElementException):
+			return False
+		return True
+
 
 	def should_be_close_window(self):
 		try:
@@ -44,6 +49,7 @@ class SpeedPage(BasePage):
 			wb=O.load_workbook(Excel_file)
 			ws=wb[Excel_worksheet]
 			ws.cell(i,2).value="FAIL"
+			ws.cell(i,3).value="FAIL"
 			wb.save(Excel_file)
 			wb.close()
 
@@ -62,6 +68,7 @@ class SpeedPage(BasePage):
 			close_btn.click()
 			wb=O.load_workbook(Excel_file)
 			ws=wb[Excel_worksheet]
+			ws.cell(i,2).value="FAIL"
 			ws.cell(i,3).value="FAIL"
 			wb.save(Excel_file)
 			wb.close()

@@ -2,6 +2,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
+import openpyxl as O
 
 class BasePage():
 
@@ -11,9 +12,18 @@ class BasePage():
         self.browser.implicitly_wait(timeout)
         
     def open(self):
-        self.browser.get(self.url)
+        try:
+            self.browser.get(self.url)
+        except(WebDriverException):
+            for i in range(2,7):
+                wb=O.load_workbook(Excel_file)
+                ws=wb[Excel_worksheet]
+                ws.cell(i,i).value=download_number.text
+                wb.save(Excel_file)
+                wb.close()
 
-    def is_element_present(self, how, what, timeout=50):
+
+    def is_element_present(self, how, what, timeout=30):
         try:
             WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((how, what)))
         except (NoSuchElementException):
